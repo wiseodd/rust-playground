@@ -19,7 +19,7 @@ pub fn train() -> Result<()> {
 
     const N_EPOCHS: u64 = 100;
     let pbar = ProgressBar::new(N_EPOCHS);
-    pbar.set_style(ProgressStyle::with_template("[{msg}] {bar:40}")?);
+    pbar.set_style(ProgressStyle::with_template("[{msg}] {wide_bar}")?);
 
     for epoch in 1..N_EPOCHS {
         let mut avg_loss = 0f32;

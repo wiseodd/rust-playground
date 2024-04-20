@@ -1,5 +1,5 @@
 [package]
-name = "tch-rs-playground"
+name = "rust-playground"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,4 +9,9 @@ edition = "2021"
 anyhow = "1.0.82"
 clap = { version = "4.5.4", features = ["derive"] }
 indicatif = "0.17.8"
+ndarray = "0.15.6"
+ndarray-linalg = "0.16.0"
+ndarray-rand = "0.14.0"
+ndarray-stats = "0.5.1"
+probability = "0.20.3"
 tch = { git = "https://github.com/LaurentMazare/tch-rs.git", version = "0.15.0" }
