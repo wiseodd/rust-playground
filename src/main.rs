@@ -2,11 +2,8 @@ use anyhow::{Ok, Result};
 use clap::Parser;
 
 mod tch_rs {
-    pub mod mnist;
-}
-
-mod native {
     pub mod beam_search;
+    pub mod mnist;
 }
 
 #[derive(Parser)]
@@ -20,8 +17,8 @@ fn main() -> Result<()> {
 
     match args.problem.as_str() {
         "tch-mnist" => tch_rs::mnist::train()?,
-        "native-beamsearch" => native::beam_search::run()?,
-        _ => println!("Provide an arg! Possible choices: [tch-mnist, native-beamsearch]!"),
+        "tch-beamsearch" => tch_rs::beam_search::run()?,
+        _ => println!("Provide an arg! Possible choices: [tch-mnist, tch-beamsearch]!"),
     }
 
     Ok(())
