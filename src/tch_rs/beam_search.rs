@@ -51,15 +51,14 @@ pub fn run() -> Result<()> {
         // Infer which text_cand each topk_token is the continuation of
         let topk_beam_idxs = topk_idxs.floor_divide_scalar(N_OPTS);
 
-        // println!("{N_OPTS} {topk_seq_idxs:?} {topk_beam_idxs:?}");
-
         // Concatenate the new topk indices to the
         for k in 0..BEAM_WIDTH as usize {
-            let beam_idx = i64::try_from(topk_beam_idxs.i(k as i64))?;
-            let beam_idx = usize::try_from(beam_idx)?;
+            let beam_idx: i64 = topk_beam_idxs.i(k as i64).try_into()?;
+            let beam_idx: usize = beam_idx.try_into()?;
 
             let mut new_cand = cand_seqs[beam_idx].clone();
             new_cand.push(i64::try_from(topk_seq_idxs.i(k as i64))?);
+
             cand_seqs[k] = new_cand;
         }
 
@@ -70,7 +69,7 @@ pub fn run() -> Result<()> {
     println!("Beam Search:");
 
     for k in 0..BEAM_WIDTH as usize {
-        let logprob = f32::try_from(cand_logprobs.i(k as i64))?;
+        let logprob: f32 = cand_logprobs.i(k as i64).try_into()?;
         let cand_seq = cand_seqs[k].clone();
         println!("Candidate {} (logprob: {logprob:.5}): {cand_seq:?}", k + 1);
     }
